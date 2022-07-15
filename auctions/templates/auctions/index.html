@@ -2,6 +2,27 @@
 
 {% block body %}
     <h2>Active Listings</h2>
+    <ul style="list-style-type:none">
+        {% for listing in listings %}
+        <li>
+            <div id="each-listing" style="border-style: groove; margin: 0 auto; width: auto; height:auto">
 
-    TODO
+                <div class="image">
+                    <img class="listing_image" src="{{listing.picture}}" alt="Image of {{listing.title}}">
+                </div>
+
+                <div class="content-descr" style="height: auto; width:auto">
+                    <label>{{listing.title}}</label>
+                    <br>
+                    <p><label>Price: </label> {{listing.starting_bid}} CAD</p>
+                    <p>{{listing.description}}</p>
+                    <p>Created {{listing.time_posted}}</p>
+                </div>
+
+            </div>
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+    
 {% endblock %}

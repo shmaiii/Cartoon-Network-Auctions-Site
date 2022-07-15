@@ -19,8 +19,8 @@ class AuctionListing(models.Model):
     description = models.CharField(blank = True, max_length=1000)
     picture = models.URLField()
     time_posted = models.DateField(auto_now_add = True)
-    num_of_bids = models.IntegerField()
-    category = models.CharField(choices = Category.choices, max_length=50)
+    #num_of_bids = models.IntegerField()
+    #category = models.CharField(choices = Category.choices, max_length=50)
     starting_bid = models.FloatField()      
        
 
