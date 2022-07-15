@@ -5,13 +5,13 @@
     <ul style="list-style-type:none">
         {% for listing in listings %}
         <li>
-            <div id="each-listing" style="border-style: groove; margin: 0 auto; width: auto; height:auto">
+            <div id="each-listing" style="border-style: groove; height: 400px;">
 
-                <div class="image">
-                    <img class="listing_image" src="{{listing.picture}}" alt="Image of {{listing.title}}">
+                <div class="image" style="width: 400px; height: 100%; float:left; margin-right: 30px;">
+                    <img class="listing_image" src="{{listing.picture}}" alt="Image of {{listing.title}}" width="100%" height="100%">
                 </div>
 
-                <div class="content-descr" style="height: auto; width:auto">
+                <div class="content-descr" style="height: 100%; width:auto;">
                     <label>{{listing.title}}</label>
                     <br>
                     <p><label>Price: </label> {{listing.starting_bid}} CAD</p>
