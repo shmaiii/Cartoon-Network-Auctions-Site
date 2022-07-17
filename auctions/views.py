@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -74,10 +74,15 @@ def create_listing(request):
         image = request.POST["image"]
 
         #create object
-        listing = AuctionListing(title=title, description=description, picture=image, starting_bid=starting_bid )
+        listing = AuctionListing(title=title, description=description, picture=image, starting_bid=starting_bid, owner=get_user(request) )
         listing.save()
 
     return render(request, "auctions/create-listing.html")
+
+def listing(request, title):
+    return render(request, "auctions/listing.html", {
+        "title": title
+    })
 
 def watchlist(request):
     pass

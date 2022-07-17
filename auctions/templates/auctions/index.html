@@ -7,16 +7,18 @@
         <li>
             <div id="each-listing" style="border-style: groove; height: 400px;">
 
-                <div class="image" style="width: 400px; height: 100%; float:left; margin-right: 30px;">
-                    <img class="listing_image" src="{{listing.picture}}" alt="Image of {{listing.title}}" width="100%" height="100%">
-                </div>
+                <a href="{% url 'listing' listing.title %}">
+                    <div class="image" style="width: 400px; height: 100%; float:left; margin-right: 30px; padding: 20px;">
+                        <img class="listing_image" src="{{listing.picture}}" alt="Image of {{listing.title}}" width="100%" height="100%">
+                    </div>
+                </a>
 
-                <div class="content-descr" style="height: 100%; width:auto;">
-                    <label>{{listing.title}}</label>
+                <div class="content-descr" style="height: 100%; width:auto; padding: 20px;">
+                    <a href="{% url 'listing' listing.title %}" style="text-decoration:none; color: black; font-weight: bold;"><label>{{listing.title}}</label></a>
                     <br>
                     <p><label>Price: </label> {{listing.starting_bid}} CAD</p>
                     <p>{{listing.description}}</p>
-                    <p>Created {{listing.time_posted}}</p>
+                    <p>Created {{listing.time_posted}} by {{listing.owner}}</p>
                 </div>
 
             </div>

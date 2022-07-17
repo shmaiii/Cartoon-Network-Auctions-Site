@@ -1,3 +1,4 @@
+from pickle import TRUE
 from statistics import mode
 from tkinter import CASCADE
 from django.contrib.auth.models import AbstractUser
@@ -21,7 +22,8 @@ class AuctionListing(models.Model):
     time_posted = models.DateField(auto_now_add = True)
     #num_of_bids = models.IntegerField()
     #category = models.CharField(choices = Category.choices, max_length=50)
-    starting_bid = models.FloatField()      
+    starting_bid = models.FloatField()    
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner", null=True)
        
 
 # represent a bid placed by an user
