@@ -23,8 +23,8 @@ class AuctionListing(models.Model):
     #num_of_bids = models.IntegerField()
     #category = models.CharField(choices = Category.choices, max_length=50)
     starting_bid = models.FloatField()    
+    #current_price = models.FloatField(default=to_some_value)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner", null=True)
-       
 
 # represent a bid placed by an user
 class Bids(models.Model):
