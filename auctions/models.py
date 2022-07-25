@@ -20,11 +20,16 @@ class AuctionListing(models.Model):
     description = models.CharField(blank = True, max_length=1000)
     picture = models.URLField()
     time_posted = models.DateField(auto_now_add = True)
-    #num_of_bids = models.IntegerField()
+    num_of_bids = models.IntegerField(default=0) 
     #category = models.CharField(choices = Category.choices, max_length=50)
     starting_bid = models.FloatField()    
-    #current_price = models.FloatField(default=to_some_value)
+    current_price = models.FloatField(default=0)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner", null=True)
+    # title - des - pict - time - start - owner - current - numof
+
+    def _str_(self):
+        return f"{self.id}: {self.title} and {self.starting_bid} and {self.current_price} and {self.owner}"
+
 
 # represent a bid placed by an user
 class Bids(models.Model):

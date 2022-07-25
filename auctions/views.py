@@ -74,7 +74,7 @@ def create_listing(request):
         image = request.POST["image"]
 
         #create object
-        listing = AuctionListing(title=title, description=description, picture=image, starting_bid=starting_bid, owner=get_user(request) )
+        listing = AuctionListing(title=title, description=description, picture=image, starting_bid=starting_bid, current_price=starting_bid, owner=get_user(request) )
         listing.save()
 
     return render(request, "auctions/create-listing.html")
