@@ -9,10 +9,23 @@
         <img class="listing_image" src="{{listing.picture}}" alt="Image of {{listing.title}}" width="100%" height="100%" style="text-align:center">
     </div>
     <br>
-    <h3 class="title" style="font-weight:bold; text-align:center">{{listing.title}}</h3>
-    <h5><label>Current Price: </label> {{listing.current_price}}</h5>
-    <p><label>Description: </label> {{listing.description}}</p>
-    <p><label>Current bids placed: </label> {{listing.num_of_bids}}</p>
-    <p style="font-style: italic"> Posted by {{listing.owner}} on {{listing.time_posted}}</p>
+    <div>
+        <h3 class="title" style="font-weight:bold; text-align:center">{{listing.title}}</h3>
+        <h5><label>Current Price: </label> {{listing.current_price}}</h5>
+        <p><label>Description: </label> {{listing.description}}</p>
+        <p><label>Current bids placed: </label> {{listing.num_of_bids}}</p>
+        <p style="font-style: italic"> Posted by {{listing.owner}} on {{listing.time_posted}}</p>
+    </div>
+    <div>
+        {% if user.is_authenticated %} 
+            {% if not added %}
+                <a href = "{% url 'watchlistAdd' listing.id %}" role="button"> Add to Watchlist </a>
+            {% else %}
+                <a href = "{% url 'remove_from_watchlist' listing.id %}" role="button">Remove from Watchlist</p>
+            {% endif %}
+        {% else %}
+            <p>Log in to add to watchlist</p>
+        {% endif %}
+    </div>
     
 {% endblock %}

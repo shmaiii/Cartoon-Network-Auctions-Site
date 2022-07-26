@@ -28,7 +28,7 @@ class AuctionListing(models.Model):
     # title - des - pict - time - start - owner - current - numof
 
     def _str_(self):
-        return f"{self.id}: {self.title} and {self.starting_bid} and {self.current_price} and {self.owner}"
+        return f"{self.id}: {self.title} | {self.starting_bid} | {self.current_price} | {self.owner}"
 
 
 # represent a bid placed by an user
@@ -44,4 +44,10 @@ class Comments(models.Model):
     listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, related_name="comment_listing")
     time_posted = models.DateField(auto_now=True)
 
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
+    listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, related_name = "listing")
+
+    def _str_(self):
+        return f"{self.id}: {self.user} added {self.listing}"
 

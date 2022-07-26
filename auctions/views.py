@@ -1,10 +1,11 @@
+
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-
-from .models import AuctionListing, User
+from django.contrib.auth.decorators import login_required
+from .models import AuctionListing, User, Watchlist
 
 
 def index(request):
@@ -80,13 +81,54 @@ def create_listing(request):
     return render(request, "auctions/create-listing.html")
 
 def listing(request, title, id):
+    listing = AuctionListing.objects.get(pk=id)
+
+    if Watchlist.objects.filter(user=get_user(request), listing= listing).exists():
+        added = True
+    else:
+        added = False
+    
+
     return render(request, "auctions/listing.html", {
-        "listing": AuctionListing.objects.get(pk=id),
-        "title": title
+        "listing": listing,
+        "title": title,
+        "added": added
     })
 
+def watchlistAdd(request, id):
+
+    #listing = AuctionListing.objects.get(pk=id)
+    listing = get_object_or_404(AuctionListing, pk=id)
+
+    saved_listing = Watchlist(user=get_user(request), listing=listing)
+    saved_listing.save()
+        
+    return HttpResponseRedirect(reverse("listing", kwargs={"title": listing.title, "id": id}))
+
+def remove_from_watchlist(request, id):
+
+    listing = get_object_or_404(AuctionListing, pk=id)
+    user = get_user(request)
+
+    instance = Watchlist.objects.filter(user=user, listing=listing)
+    instance.delete()
+
+    return HttpResponseRedirect(reverse("listing", kwargs={"title": listing.title, "id": id}))   
+    
+@login_required
 def watchlist(request):
-    pass
+    user = get_user(request)
+
+    lists = Watchlist.objects.filter(user=user).values_list('listing', flat=True)
+
+    listings = []
+    for l in lists:
+        listings.append(AuctionListing.objects.get(pk=l))
+
+    return render(request, "auctions/watchlist.html", {
+        "listings": listings
+    })
+
 
 def category(request):
     pass
