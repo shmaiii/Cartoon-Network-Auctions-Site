@@ -1,13 +1,48 @@
 {% extends "auctions/listing.html" %}
 
 {% block subbody %}
-    {% if user.is_authenticated %} 
-        {% if not added %}
-            <a href = "{% url 'watchlistAdd' listing.id %}" role="button"> Add to Watchlist </a>
-        {% else %}
-            <a href = "{% url 'remove_from_watchlist' listing.id %}" role="button">Remove from Watchlist</p>
-        {% endif %}
+
+    {% if not added %}
+        <a href = "{% url 'watchlistAdd' listing.id %}" role="button"> Add to Watchlist </a>
     {% else %}
-        <p>Log in to add to watchlist</p>
+        <a href = "{% url 'remove_from_watchlist' listing.id %}" role="button">Remove from Watchlist</p>
     {% endif %}
+
+
+    {% if not listing.active %}
+        <h5 style="font-style: italic; color:red"> This listing has been closed. </h5>
+
+        {% if winner is None %}
+            <p>No one bidded on this item!</p>
+        {% else %}
+            {% if is_current_user_winner %} 
+                <p>Congratulations! You won this item  - {{listing.title}} at the price of {{listing.current_price}}</p>
+            {% else %} 
+                <p> The winner is {{winner.username}} at the price of {{listing.current_price}}</p>
+            {% endif %}
+        {% endif %}
+
+    {% else %}
+
+        {% if not is_owner %}
+
+            <form action="{% url 'place_bid' listing.id %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="bid_value">
+                <input type="submit" value="Place Bid">
+            </form>
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+                {% endfor %}
+            {% endif %}
+
+        {% else %} 
+            <div> <a href="{% url 'close_bid' listing.id %}" role="button"> Close Bid </a> </div>
+
+        {% endif %}
+    
+    {% endif %}
+    
 {% endblock %}

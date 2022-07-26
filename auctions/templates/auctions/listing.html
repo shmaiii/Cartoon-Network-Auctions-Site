@@ -11,7 +11,13 @@
     <br>
     <div>
         <h3 class="title" style="font-weight:bold; text-align:center">{{listing.title}}</h3>
-        <h5><label>Current Price: </label> {{listing.current_price}}</h5>
+        <h5><label>Current Price: </label>
+            {% if listing.current_price >= listing.starting_bid %} 
+                {{listing.current_price}}
+            {% else %}
+                {{listing.starting_bid}}
+            {% endif %}
+        </h5>
         <p><label>Description: </label> {{listing.description}}</p>
         <p><label>Current bids placed: </label> {{listing.num_of_bids}}</p>
         <p style="font-style: italic"> Posted by {{listing.owner}} on {{listing.time_posted}}</p>

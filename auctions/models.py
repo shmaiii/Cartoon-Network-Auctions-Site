@@ -25,6 +25,7 @@ class AuctionListing(models.Model):
     starting_bid = models.FloatField()    
     current_price = models.FloatField(default=0)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner", null=True)
+    active = models.BooleanField(default=True)
     # title - des - pict - time - start - owner - current - numof
 
     def _str_(self):

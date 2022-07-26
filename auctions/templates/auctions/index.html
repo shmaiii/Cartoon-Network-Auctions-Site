@@ -28,7 +28,13 @@
                         <a href="{% url 'listing' listing.title listing.id %}" style="text-decoration:none; color: black; font-weight: bold;"><label>{{listing.title}}</label></a>
                     {% endif %}
                     <br>
-                    <p><label>Price: </label> {{listing.starting_bid}} CAD</p>
+                    <p><label>Price: </label> 
+                        {% if listing.current_price >= listing.starting_bid %}
+                            {{listing.current_price}} CAD
+                        {% else %} 
+                            {{listing.starting_bid}} CAD
+                        {% endif %}
+                    </p>
                     <p>{{listing.description}}</p>
                     <p>Created {{listing.time_posted}} by {{listing.owner}}</p>
                 </div>
