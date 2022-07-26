@@ -4,7 +4,7 @@
     <ul>
         {% for listing in listings %}
             <li>
-                <a href="{% url 'listing' listing.title listing.id %}" style="color: black; font-weight: bold;">
+                <a href="{% url 'listing_auth' listing.title listing.id %}" style="color: black; font-weight: bold;">
                     <label>{{listing.title}}</label>
                 </a>
             </li>

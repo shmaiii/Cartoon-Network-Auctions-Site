@@ -1,0 +1,13 @@
+{% extends "auctions/listing.html" %}
+
+{% block subbody %}
+    {% if user.is_authenticated %} 
+        {% if not added %}
+            <a href = "{% url 'watchlistAdd' listing.id %}" role="button"> Add to Watchlist </a>
+        {% else %}
+            <a href = "{% url 'remove_from_watchlist' listing.id %}" role="button">Remove from Watchlist</p>
+        {% endif %}
+    {% else %}
+        <p>Log in to add to watchlist</p>
+    {% endif %}
+{% endblock %}

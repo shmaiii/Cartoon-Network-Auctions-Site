@@ -83,18 +83,29 @@ def create_listing(request):
 def listing(request, title, id):
     listing = AuctionListing.objects.get(pk=id)
 
+    return render(request, "auctions/listing.html", {
+        "listing": listing,
+        "title": title,
+        "added": False
+        })
+
+
+def listing_auth(request, title, id):
+    listing = AuctionListing.objects.get(pk=id)
+
+   
     if Watchlist.objects.filter(user=get_user(request), listing= listing).exists():
         added = True
     else:
         added = False
     
 
-    return render(request, "auctions/listing.html", {
+    return render(request, "auctions/listing_authenticated.html", {
         "listing": listing,
         "title": title,
         "added": added
-    })
-
+        })
+   
 def watchlistAdd(request, id):
 
     #listing = AuctionListing.objects.get(pk=id)
@@ -103,7 +114,7 @@ def watchlistAdd(request, id):
     saved_listing = Watchlist(user=get_user(request), listing=listing)
     saved_listing.save()
         
-    return HttpResponseRedirect(reverse("listing", kwargs={"title": listing.title, "id": id}))
+    return HttpResponseRedirect(reverse("listing_auth", kwargs={"title": listing.title, "id": id}))
 
 def remove_from_watchlist(request, id):
 
@@ -113,7 +124,7 @@ def remove_from_watchlist(request, id):
     instance = Watchlist.objects.filter(user=user, listing=listing)
     instance.delete()
 
-    return HttpResponseRedirect(reverse("listing", kwargs={"title": listing.title, "id": id}))   
+    return HttpResponseRedirect(reverse("listing_auth", kwargs={"title": listing.title, "id": id}))   
     
 @login_required
 def watchlist(request):
