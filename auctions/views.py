@@ -75,12 +75,15 @@ def create_listing(request):
         description = request.POST["description"]
         starting_bid = request.POST["starting-bid"]
         image = request.POST["image"]
+        category = request.POST["category"]
 
         #create object
-        listing = AuctionListing(title=title, description=description, picture=image, starting_bid=starting_bid, owner=get_user(request) )
+        listing = AuctionListing(title=title, description=description, picture=image, starting_bid=starting_bid, owner=get_user(request), category=category )
         listing.save()
 
-    return render(request, "auctions/create-listing.html")
+    return render(request, "auctions/create-listing.html", {
+        "categories": Category.objects.all()
+    })
 
 def listing(request, title, id):
     listing = AuctionListing.objects.get(pk=id)
@@ -208,4 +211,6 @@ def post_comment(request, id):
     return HttpResponseRedirect(reverse("listing_auth", kwargs={"title": listing.title, "id": id}))
 
 def category(request):
-    pass
+    return render(request, "auctions/category.html", {
+        "categories": Category.objects.all()
+    })

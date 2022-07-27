@@ -24,6 +24,14 @@
             <input type = "number" name = "starting-bid">
         </div>
         <div>
+            <label>Category: </label>
+            <select id="categories" name="category">
+                {% for category in categories %} 
+                    <option value="{{category.categories}}"> {{category.categories}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
             <input type = "submit" value="Create Listing">
         </div>
     </form>
