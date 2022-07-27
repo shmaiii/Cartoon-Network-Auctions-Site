@@ -85,9 +85,12 @@ def create_listing(request):
 def listing(request, title, id):
     listing = AuctionListing.objects.get(pk=id)
 
+    comments = Comments.objects.filter(listing=listing)
+
     return render(request, "auctions/listing.html", {
         "listing": listing,
         "title": title,
+        "comments": comments
         })
 
 #normal check is_owner function
@@ -117,10 +120,13 @@ def listing_auth(request, title, id):
             winner = Bids.objects.get(listing=listing, value=listing.current_price).bidder
             if winner == get_user(request):
                 is_current_user = True
+    
+    comments = Comments.objects.filter(listing=listing)
 
     return render(request, "auctions/listing_authenticated.html", {
         "listing": listing,
         "title": title,
+        "comments": comments,
         "added": added,
         "is_owner": is_owner(request, listing),
         "winner": winner,
@@ -173,7 +179,7 @@ def place_bid(request, id):
             bid.save()
             #update listing data
             AuctionListing.objects.filter(id=id).update(current_price = bid_value, num_of_bids = listing.num_of_bids + 1)
-            #pop up message
+            # message
             messages.add_message(request, messages.SUCCESS, f"Bids of value {bid_value} successfully placed.")
         else:
             messages.add_message(request, messages.ERROR, "Bids must be of value larger than current price!")
@@ -189,6 +195,16 @@ def close_bid(request, id):
     except:
         error("Models do not exist")
 
+    return HttpResponseRedirect(reverse("listing_auth", kwargs={"title": listing.title, "id": id}))
+
+@login_required
+def post_comment(request, id):
+    if request.method == "POST":
+        content = request.POST["content"]
+        listing = AuctionListing.objects.get(pk=id)
+        comment = Comments(author=get_user(request), content=content, listing=listing)
+        comment.save()
+    
     return HttpResponseRedirect(reverse("listing_auth", kwargs={"title": listing.title, "id": id}))
 
 def category(request):

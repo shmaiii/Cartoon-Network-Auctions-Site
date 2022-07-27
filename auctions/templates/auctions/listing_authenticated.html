@@ -46,3 +46,11 @@
     {% endif %}
     
 {% endblock %}
+
+{% block add_comment %} 
+    <form action=" {% url 'post_comment' listing.id %}" method="post">
+        {% csrf_token %}
+        <textarea name="content" rows="" cols=""></textarea>
+        <input type = "submit" value="Post">
+    </form>
+{% endblock %}

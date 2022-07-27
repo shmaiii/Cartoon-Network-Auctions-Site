@@ -26,5 +26,28 @@
         {% block subbody %}
         {% endblock %}
     </div>
+
+    <div class="comments">
+        <h3> Comments </h3>
+        <ul style="list-style-type: none;">
+            {% for comment in comments %} 
+                <li> 
+                    <div id="each_comment" style="border-style: groove; height:auto; width: fit-content; padding: 20px;">
+                        <label>{{comment.author}}: </label>
+                        <p> {{comment.content}} </p> 
+                        <p style="font-style: italic"> Posted on {{comment.time_posted}} </p>
+
+                    </div>
+                    
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div>
+            {% block add_comment %} 
+            {% endblock %}
+        </div>
+        
+    </div>
     
 {% endblock %}

@@ -41,7 +41,7 @@ class Bids(models.Model):
 
 class Comments(models.Model):
     author=models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
-    content=models.CharField(max_length=1000)
+    content=models.TextField()
     listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, related_name="comment_listing")
     time_posted = models.DateField(auto_now=True)
 
