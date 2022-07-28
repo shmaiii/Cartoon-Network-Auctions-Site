@@ -12,7 +12,7 @@ from .models import *
 
 def index(request):
     return render(request, "auctions/index.html", {
-        "listings": AuctionListing.objects.all()
+        "listings": AuctionListing.objects.filter(active=True)
     })
 
 
@@ -212,5 +212,15 @@ def post_comment(request, id):
 
 def category(request):
     return render(request, "auctions/category.html", {
+        "categories": Category.objects.all()
+    })
+
+def cate_each(request, id):
+    cat = Category.objects.get(pk=id)
+
+    listings = AuctionListing.objects.filter(active=True, category=cat)
+
+    return render(request, "auctions/category_each.html", {
+        "listings": listings,
         "categories": Category.objects.all()
     })

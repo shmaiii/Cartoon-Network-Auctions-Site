@@ -4,8 +4,16 @@
     <ul>
         {% for category in categories %} 
            <li>
-                {{category.categories}}
+                <a href="{% url 'cate_each' category.id %}">{{category.categories}}</a>
             </li>
         {% endfor %}
     </ul>
+
+    <div>
+        {% block cate_each %} 
+        {% endblock %}
+    </div>
+    
 {% endblock %}
+
+
