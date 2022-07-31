@@ -75,11 +75,12 @@ def create_listing(request):
         description = request.POST["description"]
         starting_bid = request.POST["starting-bid"]
         image = request.POST["image"]
-        category = request.POST["category"]
+        cat = Category.objects.get(categories= request.POST["category"])
 
         #create object
-        listing = AuctionListing(title=title, description=description, picture=image, starting_bid=starting_bid, owner=get_user(request), category=category )
+        listing = AuctionListing(title=title, description=description, picture=image, starting_bid=starting_bid, owner=get_user(request), category=cat)
         listing.save()
+        return HttpResponseRedirect(reverse("index"))
 
     return render(request, "auctions/create-listing.html", {
         "categories": Category.objects.all()

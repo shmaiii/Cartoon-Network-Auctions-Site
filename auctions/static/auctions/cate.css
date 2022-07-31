@@ -1,0 +1,9 @@
+#cate_list {
+   list-style-type: none;
+}
+
+.category {
+    display: inline-block;
+}
+
+

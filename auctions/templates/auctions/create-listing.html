@@ -1,4 +1,9 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'auctions/create_listing.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block title %}
     Create Listing
@@ -8,31 +13,37 @@
     <form action = "{% url 'create_listing' %}" method = "post">
         {% csrf_token %}
         <div>
-            <label>Title:</label>
-            <input type="text" name="title" placeholder="Title">
+            <label>Title:  </label>
+            <br>
+            <input class = "bar" style="width: 40%"  type="text" name="title" placeholder="Title">
         </div>
         <div>
             <label>Description: </label>
-            <textarea name="description" rows="" cols=""></textarea>
+            <br>
+            <textarea class = "bar" name="description" rows="20" cols=""></textarea>
         </div>
         <div>
             <label>Image URL: </label>
-            <input type = "url" name="image" placeholder="URL">
+            <br>
+            <input class ="bar" type = "url" name="image" placeholder="URL">
         </div>
         <div>
             <label>Starting Bid: </label>
-            <input type = "number" name = "starting-bid">
+            <br>
+            <input class ="bar" style="width:25%" type = "number" name = "starting-bid">
         </div>
+        <br>
         <div>
             <label>Category: </label>
-            <select id="categories" name="category">
+            <select class="bar" id="categories" name="category">
                 {% for category in categories %} 
                     <option value="{{category.categories}}"> {{category.categories}}</option>
                 {% endfor %}
             </select>
         </div>
-        <div>
-            <input type = "submit" value="Create Listing">
+        <br>
+        <div class="submit">
+            <input class="btn-primary" type = "submit" value="Create Listing">
         </div>
     </form>
 {% endblock %}
