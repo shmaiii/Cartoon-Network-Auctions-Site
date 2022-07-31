@@ -19,7 +19,7 @@ label {
 }
 
 form  {
-    padding: 10px;
+    padding: 20px;
     margin: 20px;
     width: 70%;
     border-radius: 25px;
@@ -35,3 +35,6 @@ form  {
     text-align: right;
 }
 
+.submit-btn {
+    background-color: #2C8CD5;
+}

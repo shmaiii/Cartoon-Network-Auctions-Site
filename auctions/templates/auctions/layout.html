@@ -15,6 +15,23 @@
                 <img src= "https://i.ytimg.com/vi/2sONe_W3igc/maxresdefault.jpg") alt="" width="10%" height="10%">
                 <h1>Auctions</h1>
             </div>
+
+            <div style="float:right; display: inline;">
+                {% if user.is_authenticated %}
+                    <div class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </div>
+                {% else %}
+                    <div>
+                        <div class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
             <br>
             <div>
                 {% if user.is_authenticated %}
@@ -37,16 +54,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href = "{% url 'watchlist' %}">WatchList</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
+                    <br>
                 {% endif %}
             </ul>
         </div>

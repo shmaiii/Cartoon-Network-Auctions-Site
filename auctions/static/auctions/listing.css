@@ -1,0 +1,126 @@
+.image-listing {
+    width: 400px; 
+    height: 400px; 
+    margin: auto; 
+    padding: 20px;
+    display: block;
+    text-align: center;
+}
+
+#listing-body {
+    background-color: #606060;
+    background-image: url("images.png");
+    background-attachment: fixed;
+    background-size: contain;
+    padding: 10px;
+    width: 90%;
+    margin:auto;
+}
+
+.listing-note {
+    font-style: italic;
+    text-align: right;
+    margin-right: 100px;
+}
+
+.listing-btn {
+    padding: 10px;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.watchlist-btn {
+    background-color: #D5CA2C;
+    display: inline-block;
+}
+
+.bid-btn {
+    background-color: #2C8CD5;
+}
+
+
+.close-bid-btn {
+    background-color: #D52C92;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.place-bid {
+    text-align: center;
+}
+
+.place-bid input[type="number"] {
+    border-radius: 15px;
+    border-style: inset;
+    border-width: 2px;
+    width: 50%;
+}
+
+.closing-div {
+    width:60%;
+    margin: auto;
+    background-color: #c1408d;
+    color: white;
+    border-radius: 15px;
+    padding:10px;
+}
+
+.closing-div h5 {
+    font-style: italic;
+}
+
+.comments {
+    background-color: #808080;
+    background-image: url("images.png");
+    background-attachment: fixed;
+    background-size: contain;
+    margin: auto;
+    width: 90%;
+    height: auto;
+    padding: 20px;
+    border-top: solid;
+    border-top-color: #D52C92;
+    border-top-width: 5px;
+    border-top-style: double;
+}
+
+.comments ul {
+    list-style-type: none;
+}
+
+#each_comment {
+    height:auto; 
+    width: 80%;
+    padding: 20px;
+    display: inline-block;
+}
+
+.cmt-content {
+    background-color: white;
+    border-style: groove; 
+    border-radius: 15px;
+}
+
+.content-note {
+    font-style: italic;
+    text-align: right;
+    margin-right: 20%;
+}
+
+.post-cmt form {
+    text-align: center;
+}
+
+.post-cmt textarea{
+    width: 80%;
+    height: auto;
+
+}
+
+.post-btn {
+    margin: auto;
+    text-align: center;
+    background-color: #2C8CD5;
+}

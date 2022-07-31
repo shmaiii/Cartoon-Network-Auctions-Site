@@ -8,10 +8,13 @@ body {
     background-image: url("background.jpg");
     background-size: cover;
     background-attachment: fixed;
+    font-family: 'Rockwell';
 }
 
 .body-heads {
     color: white;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+
 }
 
 h2 {
@@ -69,10 +72,17 @@ ul {
     text-decoration:none; 
     color: black; 
     font-weight: bold;
+    
+}
+
+.big-font {
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: large;
 }
 
 .btn-primary {
     background-color: #5F5F5F;
+    border-radius: 15px;
 }
 
 .btn-primary:hover {
@@ -82,5 +92,7 @@ ul {
 
 .nav-link {
     color: white;
+    text-transform: uppercase;
+    font-size: large;
 }
 

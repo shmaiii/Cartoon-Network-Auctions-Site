@@ -1,53 +1,65 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
 
 {% block title %}
     {{title}}
 {% endblock %}
 
+{% block style %}
+    <link href="{% static 'auctions/listing.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
-    <div class="image" style="width: 400px; height: 400px; margin: auto; padding: 20px;">
-        <img class="listing_image" src="{{listing.picture}}" alt="Image of {{listing.title}}" width="100%" height="100%" style="text-align:center">
-    </div>
-    <br>
-    <div>
-        <h3 class="title" style="font-weight:bold; text-align:center">{{listing.title}}</h3>
-        <h5><label>Current Price: </label>
-            {% if listing.current_price >= listing.starting_bid %} 
-                {{listing.current_price}}
-            {% else %}
-                {{listing.starting_bid}}
-            {% endif %}
-        </h5>
-        <p><label>Description: </label> {{listing.description}}</p>
-        <p><label>Current bids placed: </label> {{listing.num_of_bids}}</p>
-        <p style="font-style: italic"> Posted by {{listing.owner}} on {{listing.time_posted}}</p>
-    </div>
-    <div>
-        {% block subbody %}
-        {% endblock %}
-    </div>
-
-    <div class="comments">
-        <h3> Comments </h3>
-        <ul style="list-style-type: none;">
-            {% for comment in comments %} 
-                <li> 
-                    <div id="each_comment" style="border-style: groove; height:auto; width: fit-content; padding: 20px;">
-                        <label>{{comment.author}}: </label>
-                        <p> {{comment.content}} </p> 
-                        <p style="font-style: italic"> Posted on {{comment.time_posted}} </p>
-
-                    </div>
-                    
-                </li>
-            {% endfor %}
-        </ul>
-
+    <div id="listing-body">
+        <div class="image-listing">
+           <img src="{{listing.picture}}" alt="Image of {{listing.title}}" width="100%" height="100%">
+        </div>
+        <br>
         <div>
-            {% block add_comment %} 
+            <h3 class="title" style="font-weight:bold; text-align:center">{{listing.title}}</h3>
+            <h5><label>Current Price: </label>
+                {% if listing.current_price >= listing.starting_bid %} 
+                    {{listing.current_price}}
+                {% else %}
+                    {{listing.starting_bid}}
+                {% endif %}
+            </h5>
+            <p><label>Description: </label> <br> {{listing.description}}</p>
+            <p><label>Current bids placed: </label> {{listing.num_of_bids}}</p>
+            <p class="listing-note"> Posted by {{listing.owner}} on {{listing.time_posted}}</p>
+        </div>
+        <div>
+            {% block subbody %}
             {% endblock %}
         </div>
-        
+
     </div>
+    
+        <div class="comments">
+            <h3> Comments </h3>
+            <ul>
+                {% for comment in comments %} 
+                    <li> 
+                        <div id="each_comment">
+                            <label>{{comment.author}}: </label>
+                            <div class="cmt-content">
+                                <p class="content-content"> {{comment.content}} </p> 
+                                <p class="content-note"> Posted on {{comment.time_posted}} </p>
+                            </div>
+
+                        </div>
+                    
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="post-cmt">
+                {% block add_comment %} 
+                {% endblock %}
+            </div>
+        
+        </div>
+    
+    
     
 {% endblock %}

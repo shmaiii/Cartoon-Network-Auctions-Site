@@ -1,35 +1,38 @@
 {% extends "auctions/listing.html" %}
 
 {% block subbody %}
-
-    {% if not added %}
-        <a href = "{% url 'watchlistAdd' listing.id %}" role="button"> Add to Watchlist </a>
-    {% else %}
-        <a href = "{% url 'remove_from_watchlist' listing.id %}" role="button">Remove from Watchlist</p>
-    {% endif %}
-
+    <div>
+        {% if not added %}
+            <a class = "btn-primary listing-btn watchlist-btn" href = "{% url 'watchlistAdd' listing.id %}" role="button"> Add to Watchlist </a>
+        {% else %}
+            <a class = "btn-primary listing-btn watchlist-btn" href = "{% url 'remove_from_watchlist' listing.id %}" role="button">Remove from Watchlist</a>
+        {% endif %}
+    </div>
 
     {% if not listing.active %}
-        <h5 style="font-style: italic; color:red"> This listing has been closed. </h5>
+        <div class="closing-div">
+            <h5> !!! This listing has been closed and is no longer available for auctions. </h5>
 
-        {% if winner is None %}
-            <p>No one bidded on this item!</p>
-        {% else %}
-            {% if is_current_user_winner %} 
-                <p>Congratulations! You won this item  - {{listing.title}} at the price of {{listing.current_price}}</p>
-            {% else %} 
-                <p> The winner is {{winner.username}} at the price of {{listing.current_price}}</p>
+            {% if winner is None %}
+                <p class="closing-result">No one bidded on this item!</p>
+            {% else %}
+                {% if is_current_user_winner %} 
+                    <p class="closing-result">Congratulations! You won this item  - {{listing.title}} at the price of {{listing.current_price}}</p>
+                {% else %} 
+                    <p class="closing-result"> The winner is {{winner.username}} at the price of {{listing.current_price}}</p>
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
 
     {% else %}
 
         {% if not is_owner %}
 
-            <form action="{% url 'place_bid' listing.id %}" method="post">
+            <form class="place-bid" action="{% url 'place_bid' listing.id %}" method="post">
                 {% csrf_token %}
                 <input type="number" name="bid_value">
-                <input type="submit" value="Place Bid">
+                <br>
+                <input class="btn-primary listing-btn bid-btn" type="submit" value="Place Bid">
             </form>
 
             {% if messages %}
@@ -39,7 +42,8 @@
             {% endif %}
 
         {% else %} 
-            <div> <a href="{% url 'close_bid' listing.id %}" role="button"> Close Bid </a> </div>
+            
+            <div> <a class="btn-primary listing-btn close-bid-btn" href="{% url 'close_bid' listing.id %}" role="button"> Close Bid </a> </div>
 
         {% endif %}
     
@@ -50,7 +54,8 @@
 {% block add_comment %} 
     <form action=" {% url 'post_comment' listing.id %}" method="post">
         {% csrf_token %}
-        <textarea name="content" rows="" cols=""></textarea>
-        <input type = "submit" value="Post">
+        <textarea name="content" rows="5" cols=""></textarea>
+        <br>
+        <input class="btn-primary post-btn" type = "submit" value="Post">
     </form>
 {% endblock %}
