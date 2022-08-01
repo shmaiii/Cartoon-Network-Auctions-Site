@@ -9,7 +9,7 @@
 
 #listing-body {
     background-color: #606060;
-    background-image: url("images.png");
+    background-image: url("images-edited.jpg");
     background-attachment: fixed;
     background-size: contain;
     padding: 10px;
@@ -72,14 +72,7 @@ form {
 }
 
 .comments {
-    background-color: #808080;
-    background-image: url("images.png");
-    background-attachment: fixed;
-    background-size: contain;
-    margin: auto;
-    width: 90%;
     height: auto;
-    padding: 20px;
     border-top: solid;
     border-top-color: #D52C92;
     border-top-width: 5px;
