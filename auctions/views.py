@@ -12,7 +12,7 @@ from .models import *
 
 def index(request):
     return render(request, "auctions/index.html", {
-        "listings": AuctionListing.objects.filter(active=True)
+        "listings": AuctionListing.objects.filter(active=True)[::-1]
     })
 
 
@@ -168,7 +168,7 @@ def watchlist(request):
         listings.append(AuctionListing.objects.get(pk=l))
 
     return render(request, "auctions/watchlist.html", {
-        "listings": listings
+        "listings": listings[::-1]
     })
 
 @login_required
@@ -222,6 +222,6 @@ def cate_each(request, id):
     listings = AuctionListing.objects.filter(active=True, category=cat)
 
     return render(request, "auctions/category_each.html", {
-        "listings": listings,
+        "listings": listings[::-1],
         "categories": Category.objects.all()
     })
