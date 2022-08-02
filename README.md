@@ -3,7 +3,7 @@
 ## Intro
 This is a Cartoon Network Auctions Website where various users can bid on items from popular Cartoon Network movies like Adventure Time, We Bare Bears, Ben Ten, Teen Titans Go, etc... This e-commerce auction site will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
 
-Skills include Python, HTML, CSS and Django framework and SQLite3 for working with data. 
+Skills include Python, HTML, CSS and Django framework, also SQLite3 for working with data. 
 
 ## User Story
 As a user, I want to 
