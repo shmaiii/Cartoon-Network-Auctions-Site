@@ -121,4 +121,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/var/www/commerce.com/static/'
+STATIC_ROOT = 'SELF-STUDY/CS50X/projects/commerce/working/static'
